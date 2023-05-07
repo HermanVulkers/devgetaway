@@ -1,16 +1,16 @@
-import Head from 'next/head';
 import { LoginScreen } from '@/components/login-screen/login-screen';
+import { ProfileScreen } from '@/components/profile-screen/profile-screen';
 import { useSession } from 'next-auth/react';
-import { HomeScreen } from '@/components/home-screen/home-screen';
+import Head from 'next/head';
 
-export default function Home() {
+export default function Profile() {
   const { status } = useSession();
 
   const renderContent = () => {
     if (status === 'loading') {
       return <div>Loading...</div>;
     } else if (status === 'authenticated') {
-      return <HomeScreen />;
+      return <ProfileScreen />;
     } else {
       return <LoginScreen />;
     }
@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>devgetaway - explore</title>
+        <title>devgetaway - profile</title>
         <meta
           name="description"
           content="devgetaway - workspace exchange for software developers"
