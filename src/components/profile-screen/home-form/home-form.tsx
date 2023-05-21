@@ -8,6 +8,7 @@ import { Amenities } from './form-sections/amenities';
 import { DeveloperAmenities } from './form-sections/developer-amenities';
 import { Photos } from './form-sections/photos';
 import { useSession } from 'next-auth/react';
+import { validatePhotoUpload } from './helpers/validate-photo-upload';
 
 export const HomeForm = () => {
   const {
@@ -51,42 +52,46 @@ export const HomeForm = () => {
     },
   });
 
-  useEffect(() => {
+  async function fetchHomeData() {
     setIsRetrieving(true);
-    fetch('/api/get-home')
-      .then((response) => response.json())
-      .then((data) => {
-        setS3PhotoUrls(data?.s3PhotoUrls || []);
+    try {
+      const response = await fetch('/api/get-home');
+      const data = await response.json();
+      setS3PhotoUrls(data?.s3PhotoUrls || []);
+      homeForm.setValues({ ...data });
+    } catch (error) {
+      console.error('Error fetching home data', error);
+    } finally {
+      setIsRetrieving(false);
+    }
+  }
 
-        // _id mongo property comes along with the data
-        homeForm.setValues({ ...data });
-        setIsRetrieving(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching home data', error);
-        setIsRetrieving(false);
-      });
+  useEffect(() => {
+    fetchHomeData();
   }, []);
 
-  const handleImageChange = async (files) => {
-    const response = await fetch('/api/get-uploaded-photo-count');
-    const { count } = await response.json();
-    const remainingUploads = 10 - count;
-    const fileArray = Array.from(files);
-
-    if (fileArray.length > remainingUploads || fileArray.length > 10) {
-      alert(`You can upload a maximum of ${remainingUploads} more photo(s).`);
-      return;
+  async function handleFormSubmit(values) {
+    setIsSubmitting(true);
+    try {
+      const result = await submitHomeForm(values, user.id);
+      if (result.success) {
+        setIsSubmitting(false);
+      } else {
+        // Handle unsuccessful form submission (e.g., show an error message)
+      }
+    } catch (error) {
+      console.error('Error submitting form', error);
     }
+  }
 
-    const totalSize = fileArray.reduce((acc, file) => acc + file.size, 0);
-    if (totalSize > 10 * 1024 * 1024) {
-      alert('The total size of uploaded files cannot exceed 10MB.');
+  const handleImageSelect = async (files: FileList) => {
+    if ((await validatePhotoUpload(files)) === false) {
       return;
     }
 
     homeForm.getInputProps('photos').onChange(files);
 
+    const fileArray = Array.from(files);
     const blobUrls = fileArray.map((file) => URL.createObjectURL(file));
     setPhotoBlobUrls(blobUrls);
   };
@@ -109,18 +114,7 @@ export const HomeForm = () => {
           </Styled.Loader>
         )}
 
-        <form
-          onSubmit={homeForm.onSubmit(async (values) => {
-            setIsSubmitting(true);
-            const result = await submitHomeForm(values, user.id);
-            if (result.success) {
-              // setPhotoUrls(result.photoUrls);
-              setIsSubmitting(false);
-            } else {
-              // Handle unsuccessful form submission (e.g., show an error message)
-            }
-          })}
-        >
+        <form onSubmit={homeForm.onSubmit(handleFormSubmit)}>
           <Styled.FormSections>
             <Styled.FormSection>
               <h4>Basic Information</h4>
@@ -143,7 +137,8 @@ export const HomeForm = () => {
                 form={homeForm}
                 s3PhotoUrls={s3PhotoUrls}
                 photoBlobUrls={photoBlobUrls}
-                handleImageChange={handleImageChange}
+                setPhotoBlobUrls={setPhotoBlobUrls}
+                handleImageSelect={handleImageSelect}
               />
             </Styled.FormSection>
           </Styled.FormSections>

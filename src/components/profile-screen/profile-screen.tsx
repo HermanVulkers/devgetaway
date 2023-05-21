@@ -4,7 +4,6 @@ import * as Styled from './profile-screen.style';
 
 import { HomeForm } from './home-form/home-form';
 import { AboutMeForm } from './about-me-form';
-import { useEffect, useState } from 'react';
 
 export const ProfileScreen = () => {
   return (

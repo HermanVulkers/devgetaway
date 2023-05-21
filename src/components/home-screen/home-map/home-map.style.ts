@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   background-color: #ffffff;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;
 
 export const FilterContainer = styled.div`
@@ -56,9 +56,9 @@ export const Subtitle = styled.h3`
 `;
 
 export const MarkerWrapper = styled.div`
-  position: relative;
+  /* position: relative;
   width: 30px;
-  height: 30px;
+  height: 30px; */
 `;
 
 export const DropletTip = styled.div`

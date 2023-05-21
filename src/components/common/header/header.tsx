@@ -16,7 +16,7 @@ export const Header = () => {
       </Styled.LeftWrapper>
       <Styled.Navigation>
         <Styled.NavigationItem onClick={() => router.push('/')}>
-          Discover
+          Home
         </Styled.NavigationItem>
         <Styled.NavigationItem>How it works</Styled.NavigationItem>
         <Styled.NavigationItem>Pricing</Styled.NavigationItem>

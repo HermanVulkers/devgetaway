@@ -28,8 +28,6 @@ export const submitHomeForm = async (values, userId: string) => {
     })
   );
 
-  console.log('values', values);
-
   const response = await fetch('/api/create-home', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

@@ -4,9 +4,10 @@ import { useContext } from 'react';
 import * as Styled from './home-screen.style';
 import { Header } from '../common/header/header';
 import UserContext from '@/context/user-context';
-import { Discover } from './discover/discover';
+import { HomeMap } from './home-map/home-map';
 import { RecentlyAdded } from './recently-added/recently-added';
 import { BestRated } from './best-rated/best-rated';
+import { Footer } from '../common/footer/footer';
 
 export const HomeScreen = () => {
   const { status } = useSession();
@@ -18,11 +19,12 @@ export const HomeScreen = () => {
   return (
     <Styled.Container>
       <Header />
-      <Discover />
-      <Styled.FeaturedDestinations>
+      <HomeMap />
+      <Footer />
+      {/* <Styled.FeaturedDestinations>
         <RecentlyAdded />
         <BestRated />
-      </Styled.FeaturedDestinations>
+      </Styled.FeaturedDestinations> */}
     </Styled.Container>
   );
 };
