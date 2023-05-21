@@ -18,7 +18,8 @@ function matchUsersToHomes(users, homes) {
     return {
       fullName: user.name,
       city: home.city,
-      id: home._id,
+      homeId: home._id,
+      userId: user._id,
     };
   });
 }

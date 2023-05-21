@@ -5,6 +5,7 @@ import * as Styled from './header.style';
 import { AccountMenu } from './account-menu/account-menu';
 
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export const Header = () => {
   const router = useRouter();
@@ -15,11 +16,9 @@ export const Header = () => {
         <Image src={Logo} alt="logo" width={150} priority />
       </Styled.LeftWrapper>
       <Styled.Navigation>
-        <Styled.NavigationItem onClick={() => router.push('/')}>
-          Home
-        </Styled.NavigationItem>
-        <Styled.NavigationItem>How it works</Styled.NavigationItem>
-        <Styled.NavigationItem>Pricing</Styled.NavigationItem>
+        <Link href="/">Home</Link>
+        <Link href="/">How it works</Link>
+        <Link href="/">Pricing</Link>
       </Styled.Navigation>
       <Styled.RightWrapper>
         <Styled.AccountMenu>

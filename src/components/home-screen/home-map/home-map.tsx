@@ -1,20 +1,23 @@
 import * as Styled from './home-map.style';
 import Map, { Marker, NavigationControl, Popup } from 'react-map-gl';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { mockDestinations } from '@/fixtures/mock-destinations';
+
 import { MapPin } from 'tabler-icons-react';
+import { useRouter } from 'next/router';
 
 interface Location {
   city: string;
   fullName: string;
-  id: string;
+  homeId: string;
+  userId: string;
   latitude: number;
   longitude: number;
 }
 
 export const HomeMap = () => {
   const [popupInfo, setPopupInfo] = useState<Location>(null);
+  const [locations, setLocations] = useState<Location[]>([]);
+  const router = useRouter();
   // const [dateFilter, setDateFilter] = useState({
   //   start: null,
   //   end: null,
@@ -36,6 +39,11 @@ export const HomeMap = () => {
 
   // const filteredDestinations = mockDestinations.filter(isDestinationAvailable);
 
+  const handleLocationClick = (homeId: string) => {
+    // push to /getaway/:homeId
+    router.push(`/getaway/${homeId}`);
+  };
+
   const renderPopup = () => {
     return (
       popupInfo && (
@@ -47,20 +55,14 @@ export const HomeMap = () => {
           onClose={() => setPopupInfo(null)}
         >
           <Styled.PopupContainer>
-            {/* <Styled.AvatarContainer>
-              <Image
-                src={popupInfo?.avatar}
-                alt={`${popupInfo.fullName}'s avatar`}
-                width="60"
-                height="60"
-              />
-            </Styled.AvatarContainer> */}
             <Styled.PopupDetails>
               <Styled.PopupLocation>{popupInfo.city}</Styled.PopupLocation>
               <Styled.PopupFirstName>
                 {popupInfo.fullName}
               </Styled.PopupFirstName>
-              <Styled.ViewGetawayButton>
+              <Styled.ViewGetawayButton
+                onClick={() => handleLocationClick(popupInfo.homeId)}
+              >
                 View destination
               </Styled.ViewGetawayButton>
             </Styled.PopupDetails>
@@ -70,9 +72,6 @@ export const HomeMap = () => {
     );
   };
 
-  // fetch locations from get-all-locations api route
-  const [locations, setLocations] = useState<Location[]>([]);
-
   useEffect(() => {
     fetch('/api/get-all-locations')
       .then((res) => res.json())
@@ -80,8 +79,6 @@ export const HomeMap = () => {
         setLocations(data);
       });
   }, []);
-
-  console.log(locations);
 
   return (
     <Styled.Container>
@@ -97,7 +94,7 @@ export const HomeMap = () => {
           {locations.map((location) => {
             return (
               <Marker
-                key={location.id}
+                key={location.homeId}
                 longitude={location.longitude}
                 latitude={location.latitude}
                 onClick={() => console.log('clicked')}
@@ -106,14 +103,6 @@ export const HomeMap = () => {
                 <Styled.MarkerWrapper
                   onMouseEnter={() => setPopupInfo(location)}
                 >
-                  {/* <Image
-                    src={location?.avatar}
-                    onMouseEnter={() => setPopupInfo(location)}
-                    alt={`${location.fullName}'s avatar`}
-                    width="30"
-                    height="30"
-                    style={{ borderRadius: '50%', border: '2px solid #3fb1ce' }}
-                  /> */}
                   <MapPin />
                 </Styled.MarkerWrapper>
               </Marker>

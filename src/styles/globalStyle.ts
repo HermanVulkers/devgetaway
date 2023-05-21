@@ -62,7 +62,8 @@ p {
 /* Remove list styles */
 ol,
 ul {
-  list-style: none;
+  
+  /* list-style: none; */
 }
 
 /* Set default font family and size */
@@ -88,6 +89,7 @@ select {
 a {
   color: inherit;
   text-decoration: none;
+  font-size: 0.8rem;
 }
 a:hover {
   text-decoration: underline;

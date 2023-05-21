@@ -1,8 +1,16 @@
 import { getSession } from 'next-auth/react';
 const { connectToDatabase } = require('../../utils/mongo-client');
+import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
+
+  console.log('req.query.homeId', req.query.homeId);
+
+  if (!req.query.homeId) {
+    res.status(400).json({ message: 'Bad Request: Missing homeId' });
+    return;
+  }
 
   if (!session) {
     res.status(401).json({ message: 'Unauthorized' });
@@ -14,18 +22,10 @@ export default async function handler(req, res) {
     return;
   }
 
-  const userCollection = await connectToDatabase('users');
-  const user = await userCollection.findOne({
-    email: session.user.email,
-  });
-
-  if (!user) {
-    res.status(401).json({ message: 'Unauthorized' });
-    return;
-  }
-
   const homesCollection = await connectToDatabase('homes');
-  const home = await homesCollection.findOne({ userId: user._id.toString() });
+  const home = await homesCollection.findOne({
+    _id: new ObjectId(req.query.homeId),
+  });
 
   if (!home) {
     res.status(404).json({ message: 'Home not found' });

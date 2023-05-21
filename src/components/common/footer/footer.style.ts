@@ -8,26 +8,12 @@ export const Container = styled.div`
   height: 100px;
 `;
 
-export const LeftColumn = styled.div`
+export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   flex-grow: 1;
+  text-align: left;
 `;
 
-export const CenterColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-`;
-
-export const RightColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-`;
+export const Anchor = styled.a``;

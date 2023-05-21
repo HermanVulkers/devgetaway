@@ -23,7 +23,7 @@ export const RightWrapper = styled.div`
 
 export const Navigation = styled.nav`
   display: flex;
-  gap: 10px;
+  gap: 40px;
   justify-content: center;
 `;
 
