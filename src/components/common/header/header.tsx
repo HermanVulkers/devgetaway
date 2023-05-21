@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <Styled.Container>
       <Styled.LeftWrapper>
-        <Image src={Logo} alt="logo" width={150} />
+        <Image src={Logo} alt="logo" width={150} priority />
       </Styled.LeftWrapper>
       <Styled.Navigation>
         <Styled.NavigationItem onClick={() => router.push('/')}>

@@ -1,19 +1,23 @@
 import { Button, Group, Loader, LoadingOverlay } from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import * as Styled from '../profile-screen.style';
 import { submitHomeForm } from '../utils/submit-home-form';
-import { binaryStringToImageURL } from '../utils/binary-string-to-image-url';
 import { BasicInformation } from './form-sections/basic-information';
 import { Amenities } from './form-sections/amenities';
 import { DeveloperAmenities } from './form-sections/developer-amenities';
 import { Photos } from './form-sections/photos';
+import { useSession } from 'next-auth/react';
 
 export const HomeForm = () => {
-  const [citySearchValue, onCitySearchChange] = useState('');
-  const [citySuggestions, setCitySuggestions] = useState([]);
-  const [imagePreviews, setImagePreviews] = useState([]);
+  const {
+    data: { user },
+  } = useSession();
+
+  const [s3PhotoUrls, setS3PhotoUrls] = useState<{ id: string; url: string }[]>(
+    []
+  );
+  const [photoBlobUrls, setPhotoBlobUrls] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRetrieving, setIsRetrieving] = useState(false);
 
@@ -52,15 +56,10 @@ export const HomeForm = () => {
     fetch('/api/get-home')
       .then((response) => response.json())
       .then((data) => {
-        const photoURLs = data?.photos?.map((binaryString: string) => {
-          const imageURL = binaryStringToImageURL(binaryString);
+        setS3PhotoUrls(data?.s3PhotoUrls || []);
 
-          return imageURL;
-        });
-
-        setImagePreviews(photoURLs);
-
-        homeForm.setValues({ ...data, photos: [] });
+        // _id mongo property comes along with the data
+        homeForm.setValues({ ...data });
         setIsRetrieving(false);
       })
       .catch((error) => {
@@ -68,21 +67,6 @@ export const HomeForm = () => {
         setIsRetrieving(false);
       });
   }, []);
-
-  useEffect(() => {
-    if (citySearchValue) {
-      fetch(
-        `/api/city-autocomplete?input=${encodeURIComponent(citySearchValue)}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setCitySuggestions(data.predictions);
-        })
-        .catch((error) => {
-          console.error('Error fetching suggestions', error);
-        });
-    }
-  }, [citySearchValue]);
 
   const handleImageChange = async (files) => {
     const response = await fetch('/api/get-uploaded-photo-count');
@@ -103,8 +87,8 @@ export const HomeForm = () => {
 
     homeForm.getInputProps('photos').onChange(files);
 
-    const fileURLs = fileArray.map((file) => URL.createObjectURL(file));
-    setImagePreviews(fileURLs);
+    const blobUrls = fileArray.map((file) => URL.createObjectURL(file));
+    setPhotoBlobUrls(blobUrls);
   };
 
   return (
@@ -128,8 +112,9 @@ export const HomeForm = () => {
         <form
           onSubmit={homeForm.onSubmit(async (values) => {
             setIsSubmitting(true);
-            const success = await submitHomeForm(values);
-            if (success) {
+            const result = await submitHomeForm(values, user.id);
+            if (result.success) {
+              // setPhotoUrls(result.photoUrls);
               setIsSubmitting(false);
             } else {
               // Handle unsuccessful form submission (e.g., show an error message)
@@ -139,12 +124,7 @@ export const HomeForm = () => {
           <Styled.FormSections>
             <Styled.FormSection>
               <h4>Basic Information</h4>
-              <BasicInformation
-                form={homeForm}
-                citySearchValue={citySearchValue}
-                onCitySearchChange={onCitySearchChange}
-                citySuggestions={citySuggestions}
-              />
+              <BasicInformation form={homeForm} />
             </Styled.FormSection>
 
             <Styled.FormSection>
@@ -161,7 +141,8 @@ export const HomeForm = () => {
               <h4>Photos of your getaway</h4>
               <Photos
                 form={homeForm}
-                imagePreviews={imagePreviews}
+                s3PhotoUrls={s3PhotoUrls}
+                photoBlobUrls={photoBlobUrls}
                 handleImageChange={handleImageChange}
               />
             </Styled.FormSection>

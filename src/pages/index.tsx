@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { HomeScreen } from '@/components/home-screen/home-screen';
 
 export default function Home() {
-  const { status } = useSession();
+  const { status, data } = useSession();
 
   const renderContent = () => {
     if (status === 'loading') {

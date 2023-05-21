@@ -2,20 +2,35 @@ import { Select, Textarea, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
 import { BuildingCommunity, Home } from 'tabler-icons-react';
 import { FormValues } from '../types/types';
+import { useEffect, useState } from 'react';
 
 interface BasicInformationProps {
-  citySearchValue: string;
-  citySuggestions: string[];
   form: UseFormReturnType<FormValues>;
-  onCitySearchChange: (value: string) => void;
 }
 
-export const BasicInformation = ({
-  citySearchValue,
-  citySuggestions,
-  form,
-  onCitySearchChange,
-}: BasicInformationProps) => {
+interface CitySuggestion {
+  description: string;
+}
+
+export const BasicInformation = ({ form }: BasicInformationProps) => {
+  const [citySuggestions, setCitySuggestions] = useState<CitySuggestion[]>([]);
+  const [citySearchValue, onCitySearchChange] = useState('');
+
+  useEffect(() => {
+    if (citySearchValue) {
+      fetch(
+        `/api/city-autocomplete?input=${encodeURIComponent(citySearchValue)}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setCitySuggestions(data.predictions);
+        })
+        .catch((error) => {
+          console.error('Error fetching suggestions', error);
+        });
+    }
+  }, [citySearchValue]);
+
   return (
     <>
       <Textarea

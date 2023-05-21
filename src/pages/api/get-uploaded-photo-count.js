@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/react';
-const { connectToDatabase } = require('../../../utils/mongo-client');
+const { connectToDatabase } = require('../../utils/mongo-client');
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -21,10 +21,12 @@ export default async function handler(req, res) {
 
   const homeCollection = await connectToDatabase('homes');
 
-  const existingHome = await homeCollection.findOne({ userId: user._id });
+  const existingHome = await homeCollection.findOne({
+    userId: session?.user?.id,
+  });
 
   if (existingHome) {
-    const photoCount = existingHome.photos.length;
+    const photoCount = existingHome.s3PhotoUrls.length;
     res.status(200).json({ count: photoCount });
   } else {
     res.status(200).json({ count: 0 });

@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/react';
-const { connectToDatabase } = require('../../../../utils/mongo-client');
+const { connectToDatabase } = require('../../../utils/mongo-client');
 
 export default async function handler(req, res) {
   const session = await getSession({ req });

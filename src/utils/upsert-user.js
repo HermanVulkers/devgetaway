@@ -3,7 +3,7 @@ const { connectToDatabase } = require('./mongo-client');
 export async function upsertUser(email, name, image) {
   const collection = await connectToDatabase('users');
 
-  await collection.updateOne(
+  const updatedUser = await collection.findOneAndUpdate(
     { email },
     {
       $setOnInsert: {
@@ -16,6 +16,11 @@ export async function upsertUser(email, name, image) {
         updatedAt: new Date(),
       },
     },
-    { upsert: true }
+    {
+      upsert: true,
+      returnDocument: 'after',
+    }
   );
+
+  return updatedUser.value;
 }

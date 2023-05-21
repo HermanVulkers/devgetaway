@@ -1,7 +1,15 @@
 import { FileInput, Grid, Image } from '@mantine/core';
 import { Upload } from 'tabler-icons-react';
+import { Check } from 'tabler-icons-react';
 
-export const Photos = ({ form, imagePreviews, handleImageChange }) => {
+import * as Styled from './photos.style';
+
+export const Photos = ({
+  form,
+  s3PhotoUrls,
+  photoBlobUrls,
+  handleImageChange,
+}) => {
   return (
     <>
       <FileInput
@@ -16,12 +24,33 @@ export const Photos = ({ form, imagePreviews, handleImageChange }) => {
         }}
       />
       <Grid mt="md" grow>
-        {imagePreviews &&
-          imagePreviews.map((src: string, index: number) => (
+        {photoBlobUrls &&
+          photoBlobUrls.map((blobUrl: string, index: number) => (
             <Grid.Col key={index} span={4}>
-              <Image src={src} alt={`Getaway photo ${index}`} fit="cover" />
+              <Styled.NewPhoto>
+                <Check />
+                <Image
+                  src={blobUrl}
+                  alt={`Getaway photo ${index}`}
+                  fit="cover"
+                />
+              </Styled.NewPhoto>
             </Grid.Col>
           ))}
+      </Grid>
+      <Grid mt="md" grow>
+        {s3PhotoUrls &&
+          s3PhotoUrls.map(
+            (s3PhotoUrl: { id: string; url: string }, index: number) => (
+              <Grid.Col key={index} span={4}>
+                <Image
+                  src={s3PhotoUrl.url}
+                  alt={`Getaway photo ${index}`}
+                  fit="cover"
+                />
+              </Grid.Col>
+            )
+          )}
       </Grid>
     </>
   );
