@@ -1,12 +1,11 @@
 import { Header } from '@/components/common/header/header';
-import * as Styled from './terms-and-conditions.style';
 import { Footer } from '@/components/common/footer/footer';
 
 export default function TermsAndConditions() {
   return (
     <>
       <Header />
-      <Styled.Container>
+      <div>
         <h2>Terms and Conditions</h2>
 
         <p>
@@ -14,7 +13,7 @@ export default function TermsAndConditions() {
           agree to the following Terms and Conditions:
         </p>
 
-        <Styled.StyledH3>1. Acceptance of Terms</Styled.StyledH3>
+        <h3>1. Acceptance of Terms</h3>
         <p>
           These Terms and Conditions govern your use of the platform. By
           accessing or using the platform, you agree to be bound by these Terms.
@@ -22,7 +21,7 @@ export default function TermsAndConditions() {
           platform.
         </p>
 
-        <Styled.StyledH3>2. Registration and Account</Styled.StyledH3>
+        <h3>2. Registration and Account</h3>
         <p>
           To use the platform, you must register and create an account. You
           agree to provide accurate and complete information during registration
@@ -32,7 +31,7 @@ export default function TermsAndConditions() {
           immediately of any unauthorized use of your account.
         </p>
 
-        <Styled.StyledH3>3. User Responsibilities</Styled.StyledH3>
+        <h3>3. User Responsibilities</h3>
         <p>
           As a user, you agree to use the platform in a manner consistent with
           any and all applicable laws and regulations. You are solely
@@ -42,7 +41,7 @@ export default function TermsAndConditions() {
           or disputes between users.
         </p>
 
-        <Styled.StyledH3>4. Content and Conduct</Styled.StyledH3>
+        <h3>4. Content and Conduct</h3>
         <p>
           You are responsible for all content you post on the platform and the
           consequences of sharing and publishing such content. You agree not to
@@ -52,7 +51,7 @@ export default function TermsAndConditions() {
           act.
         </p>
 
-        <Styled.StyledH3>5. Privacy</Styled.StyledH3>
+        <h3>5. Privacy</h3>
         <p>
           Your privacy is very important to us. We collect, use, and share your
           information as described in our Privacy Policy. By using the platform,
@@ -60,7 +59,7 @@ export default function TermsAndConditions() {
           accordance with our Privacy Policy.
         </p>
 
-        <Styled.StyledH3>6. Limitation of Liability</Styled.StyledH3>
+        <h3>6. Limitation of Liability</h3>
         <p>
           The platform, its affiliates, and their respective officers,
           directors, employees, agents, licensors, or third-party service
@@ -71,7 +70,7 @@ export default function TermsAndConditions() {
           such damages), resulting from your use of the platform and services.
         </p>
 
-        <Styled.StyledH3>7. Indemnification</Styled.StyledH3>
+        <h3>7. Indemnification</h3>
         <p>
           You agree to indemnify, defend, and hold harmless the platform, its
           affiliates, and their respective officers, directors, employees,
@@ -81,7 +80,7 @@ export default function TermsAndConditions() {
           platform or any violation of these Terms and Conditions.
         </p>
 
-        <Styled.StyledH3>8. Dispute Resolution</Styled.StyledH3>
+        <h3>8. Dispute Resolution</h3>
         <p>
           Any dispute arising from these Terms and Conditions will be resolved
           through arbitration, according to the rules of the Netherlands
@@ -90,7 +89,7 @@ export default function TermsAndConditions() {
           legal matter arising from the Terms and Conditions.
         </p>
 
-        <Styled.StyledH3>9. Governing Law</Styled.StyledH3>
+        <h3>9. Governing Law</h3>
         <p>
           These Terms and Conditions and any dispute or claim arising out of or
           in connection with them or their subject matter or formation
@@ -98,13 +97,13 @@ export default function TermsAndConditions() {
           and construed in accordance with the law of the Netherlands.
         </p>
 
-        <Styled.StyledH3>10. Changes to Terms</Styled.StyledH3>
+        <h3>10. Changes to Terms</h3>
         <p>
           We reserve the right to change these Terms and Conditions at any time
           without notice. Your continued use of the platform constitutes your
           acceptance of any changes to these Terms and Conditions.
         </p>
-      </Styled.Container>
+      </div>
       <Footer />
     </>
   );

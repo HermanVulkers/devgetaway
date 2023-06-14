@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Styled from './terms-and-conditions.style';
 import { Header } from '@/components/common/header/header';
 import { Footer } from '@/components/common/footer/footer';
 
@@ -7,7 +6,7 @@ export default function PrivacyPolicy() {
   return (
     <>
       <Header />
-      <Styled.Container>
+      <div>
         <h2>Privacy Policy</h2>
 
         <p>
@@ -17,7 +16,7 @@ export default function PrivacyPolicy() {
           collection and use of your information in accordance with this policy.
         </p>
 
-        <Styled.StyledH3>Information We Collect</Styled.StyledH3>
+        <h3>Information We Collect</h3>
 
         <p>
           <strong>Personal Information:</strong> When you register and create an
@@ -32,7 +31,7 @@ export default function PrivacyPolicy() {
           address, device information, browser type, and operating system.
         </p>
 
-        <Styled.StyledH3>How We Use Your Information</Styled.StyledH3>
+        <h3>How We Use Your Information</h3>
         <p>
           We use the personal information you provide to create and maintain
           your account, communicate with you, and provide the services offered
@@ -41,7 +40,7 @@ export default function PrivacyPolicy() {
           personalize your interactions with the platform.
         </p>
 
-        <Styled.StyledH3>Information Sharing</Styled.StyledH3>
+        <h3>Information Sharing</h3>
         <p>
           <strong>Service Providers:</strong> We may engage third-party service
           providers to perform certain functions on our behalf, such as hosting
@@ -56,7 +55,7 @@ export default function PrivacyPolicy() {
           requests, such as subpoenas, court orders, or government regulations.
         </p>
 
-        <Styled.StyledH3>Data Security</Styled.StyledH3>
+        <h3>Data Security</h3>
         <p>
           We take reasonable measures to protect the security of your personal
           information and implement appropriate safeguards to prevent
@@ -66,7 +65,7 @@ export default function PrivacyPolicy() {
           guarantee absolute security.
         </p>
 
-        <Styled.StyledH3>Your Rights</Styled.StyledH3>
+        <h3>Your Rights</h3>
         <p>
           You have certain rights regarding your personal information, including
           the right to access, update, or delete your information. If you would
@@ -74,7 +73,7 @@ export default function PrivacyPolicy() {
           information provided below.
         </p>
 
-        <Styled.StyledH3>Changes to this Privacy Policy</Styled.StyledH3>
+        <h3>Changes to this Privacy Policy</h3>
         <p>
           We reserve the right to update or change this Privacy Policy at any
           time. Any changes will be effective immediately upon posting the
@@ -83,12 +82,12 @@ export default function PrivacyPolicy() {
           Privacy Policy.
         </p>
 
-        <Styled.StyledH3>Contact Us</Styled.StyledH3>
+        <h3>Contact Us</h3>
         <p>
           If you have any questions or concerns about this Privacy Policy or our
           privacy practices, please contact us at [contact email address].
         </p>
-      </Styled.Container>
+      </div>
       <Footer />
     </>
   );
