@@ -9,12 +9,13 @@ import { RecentlyAdded } from './recently-added/recently-added';
 import { BestRated } from './best-rated/best-rated';
 import { Footer } from '../common/footer/footer';
 import { Availability } from './availability/availability';
+import { LoadingOverlay } from '@mantine/core';
 
 export const HomeScreen = () => {
   const { status } = useSession();
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <LoadingOverlay visible />;
   }
 
   return (

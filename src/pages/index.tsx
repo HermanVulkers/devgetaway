@@ -2,13 +2,14 @@ import Head from 'next/head';
 import { LoginScreen } from '@/components/login-screen/login-screen';
 import { useSession } from 'next-auth/react';
 import { HomeScreen } from '@/components/home-screen/home-screen';
+import { LoadingOverlay } from '@mantine/core';
 
 export default function Home() {
-  const { status, data } = useSession();
+  const { status } = useSession();
 
   const renderContent = () => {
     if (status === 'loading') {
-      return <div>Loading...</div>;
+      return <LoadingOverlay visible />;
     } else if (status === 'authenticated') {
       return <HomeScreen />;
     } else {

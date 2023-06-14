@@ -1,5 +1,6 @@
 import { LoginScreen } from '@/components/login-screen/login-screen';
 import { ProfileScreen } from '@/components/profile-screen/profile-screen';
+import { LoadingOverlay } from '@mantine/core';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 
@@ -8,7 +9,7 @@ export default function Profile() {
 
   const renderContent = () => {
     if (status === 'loading') {
-      return <div>Loading...</div>;
+      return <LoadingOverlay visible />;
     } else if (status === 'authenticated') {
       return <ProfileScreen />;
     } else {
