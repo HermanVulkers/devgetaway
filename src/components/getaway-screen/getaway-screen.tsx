@@ -6,9 +6,21 @@ import { Grid, SimpleGrid } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 
 export default function GetawayScreen({ home }) {
-  const availableAmenities = Object.entries(home?.amenities || {})
+  const amenities = Object.entries(home?.amenities || {})
     .filter(([key, value]) => value)
     .map(([key, value]) => key);
+
+  const devAmenities = Object.entries(home?.developerAmenities || {})
+    .filter(([key, value]) => value)
+    .map(([key, value]) => {
+      if (key === 'externalMonitors') {
+        return `${toTitleCase(key)}: ${value}`;
+      } else if (key === 'internetSpeed') {
+        return `${toTitleCase(key)}: ${value} Mbps`;
+      } else {
+        return toTitleCase(key);
+      }
+    });
 
   return (
     <>
@@ -24,16 +36,29 @@ export default function GetawayScreen({ home }) {
           ))}
         </Styled.PhotoGrid>
 
-        <div>
-          <h3>Available Amenities</h3>
-          <ul>
-            {availableAmenities?.map((amenity, index) => (
-              <li key={index}>
-                <p>{toTitleCase(amenity)}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Styled.AmenitiesContainer>
+          <Styled.Amenities>
+            <h3>Amenities</h3>
+            <ul>
+              {amenities?.map((amenity, index) => (
+                <li key={index}>
+                  <p>{toTitleCase(amenity)}</p>
+                </li>
+              ))}
+            </ul>
+          </Styled.Amenities>
+
+          <Styled.DeveloperAmenities>
+            <h3>Developer Amenities</h3>
+            <ul>
+              {devAmenities?.map((amenity, index) => (
+                <li key={index}>
+                  <p>{toTitleCase(amenity)}</p>
+                </li>
+              ))}
+            </ul>
+          </Styled.DeveloperAmenities>
+        </Styled.AmenitiesContainer>
       </Styled.Container>
       <Footer />
     </>

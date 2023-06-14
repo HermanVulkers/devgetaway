@@ -18,7 +18,7 @@ export const Header = () => {
       <Styled.Navigation>
         <Link href="/">Home</Link>
         <Link href="/">How it works</Link>
-        <Link href="/">Pricing</Link>
+        {/* <Link href="/">Pricing</Link> */}
       </Styled.Navigation>
       <Styled.RightWrapper>
         <Styled.AccountMenu>

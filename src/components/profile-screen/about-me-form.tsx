@@ -25,6 +25,19 @@ export const AboutMeForm = () => {
   return (
     <form onSubmit={form.onSubmit((values) => console.log(values))}>
       <Styled.FormSection>
+        <h4>About you</h4>
+        <TextInput
+          label="Name"
+          placeholder="Your name"
+          {...form.getInputProps('name')}
+        />
+        <Textarea
+          label="Bio"
+          placeholder="Share a little bit about yourself"
+          autosize
+          minRows={2}
+          {...form.getInputProps('interests')}
+        />
         <h4>Professional Background</h4>
         <TextInput
           label="Job Title"
@@ -32,8 +45,8 @@ export const AboutMeForm = () => {
           {...form.getInputProps('jobTitle')}
         />
         <TextInput
-          label="Tech stack"
-          placeholder="The technologies you use"
+          label="Specialties"
+          placeholder="Technologies you are specialized in"
           {...form.getInputProps('company')}
         />
       </Styled.FormSection>

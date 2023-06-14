@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   background-color: #f1faee;
+  min-height: 100vh;
 `;
 
 export const Button = styled.button`

@@ -39,6 +39,10 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+body, main {
+  min-height: 100vh;
+}
+
 /* Remove default margin */
 body,
 h1,

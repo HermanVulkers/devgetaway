@@ -8,6 +8,7 @@ import { HomeMap } from './home-map/home-map';
 import { RecentlyAdded } from './recently-added/recently-added';
 import { BestRated } from './best-rated/best-rated';
 import { Footer } from '../common/footer/footer';
+import { Availability } from './availability/availability';
 
 export const HomeScreen = () => {
   const { status } = useSession();
@@ -19,6 +20,7 @@ export const HomeScreen = () => {
   return (
     <Styled.Container>
       <Header />
+      <Availability />
       <HomeMap />
       <Footer />
       {/* <Styled.FeaturedDestinations>

@@ -84,7 +84,7 @@ export const HomeMap = () => {
     <Styled.Container>
       <Styled.MapContainer>
         <Map
-          initialViewState={{ latitude: 20, longitude: 0, zoom: 1 }}
+          initialViewState={{ latitude: 20, longitude: 0, zoom: 1.5 }}
           minZoom={1}
           mapStyle="mapbox://styles/mapbox/streets-v12"
           mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
@@ -103,7 +103,7 @@ export const HomeMap = () => {
                 <Styled.MarkerWrapper
                   onMouseEnter={() => setPopupInfo(location)}
                 >
-                  <MapPin />
+                  <MapPin fill="white" />
                 </Styled.MarkerWrapper>
               </Marker>
             );

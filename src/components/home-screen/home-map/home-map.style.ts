@@ -3,6 +3,7 @@ import { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -19,6 +20,7 @@ export const FilterContainer = styled.div`
 
 export const MapContainer = styled.div`
   width: 100%;
+  flex-grow: 1;
 
   .mapboxgl-map {
     font-family: 'Roboto', sans-serif;
@@ -31,7 +33,6 @@ export const MapContainer = styled.div`
     height: fit-content;
     justify-content: center;
     padding: 10px;
-    border: 2px solid #3fb1ce;
   }
 
   .mapboxgl-ctrl-bottom-left,
@@ -59,18 +60,21 @@ export const MarkerWrapper = styled.div`
   /* position: relative;
   width: 30px;
   height: 30px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-export const DropletTip = styled.div`
-  position: absolute;
-  bottom: -3px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 10px;
-  height: 10px;
-  background-color: #3fb1ce;
-  z-index: -1;
-`;
+// export const DropletTip = styled.div`
+//   position: absolute;
+//   bottom: -3px;
+//   left: 50%;
+//   transform: translateX(-50%) rotate(45deg);
+//   width: 10px;
+//   height: 10px;
+//   background-color: #3fb1ce;
+//   z-index: -1;
+// `;
 
 export const PopupContainer = styled.div`
   display: flex;

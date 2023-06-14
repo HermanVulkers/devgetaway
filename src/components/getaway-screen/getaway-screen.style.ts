@@ -21,3 +21,29 @@ export const PhotoGrid = styled.div`
   gap: 10px;
   width: 100%;
 `;
+
+export const AmenitiesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+export const Amenities = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 5px;
+  padding: 10px 20px;
+
+  /* background-color: #aaf5ff; */
+`;
+
+export const DeveloperAmenities = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  height: fit-content;
+  background-color: #aaf5ff;
+`;
