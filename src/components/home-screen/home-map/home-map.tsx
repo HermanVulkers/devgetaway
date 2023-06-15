@@ -17,30 +17,14 @@ interface Location {
 export const HomeMap = () => {
   const [popupInfo, setPopupInfo] = useState<Location>(null);
   const [locations, setLocations] = useState<Location[]>([]);
+  const [viewState, setViewState] = useState({
+    latitude: 0,
+    longitude: 0,
+    zoom: 1,
+  });
   const router = useRouter();
-  // const [dateFilter, setDateFilter] = useState({
-  //   start: null,
-  //   end: null,
-  // });
-
-  // const isDestinationAvailable = (destination) => {
-  //   if (!dateFilter.start || !dateFilter.end) return true;
-
-  //   const startDate = new Date(dateFilter.start);
-  //   const endDate = new Date(dateFilter.end);
-
-  //   return (
-  //     startDate >= destination.dateRange.start &&
-  //     startDate <= destination.dateRange.end &&
-  //     endDate >= destination.dateRange.start &&
-  //     endDate <= destination.dateRange.end
-  //   );
-  // };
-
-  // const filteredDestinations = mockDestinations.filter(isDestinationAvailable);
 
   const handleLocationClick = (homeId: string) => {
-    // push to /getaway/:homeId
     router.push(`/getaway/${homeId}`);
   };
 
@@ -77,18 +61,32 @@ export const HomeMap = () => {
       .then((res) => res.json())
       .then((data) => {
         setLocations(data);
-      });
+      })
+      .catch((error) => console.log('An error occurred: ', error));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://ip-api.com/json')
+      .then((response) => response.json())
+      .then((data) => {
+        setViewState({
+          latitude: data.lat,
+          longitude: data.lon,
+          zoom: 3,
+        });
+      })
+      .catch((error) => console.log('An error occurred: ', error));
   }, []);
 
   return (
     <Styled.Container>
       <Styled.MapContainer>
         <Map
-          initialViewState={{ latitude: 20, longitude: 0, zoom: 1.5 }}
+          {...viewState}
           minZoom={1}
           mapStyle="mapbox://styles/mapbox/streets-v12"
           mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-          style={{ width: '100%', height: 400 }}
+          style={{ width: '100%', height: '100%' }}
           scrollZoom={false}
         >
           {locations.map((location) => {

@@ -5,7 +5,6 @@ export const Footer = () => {
   return (
     <Styled.Container>
       <Styled.Column></Styled.Column>
-      <Styled.Column></Styled.Column>
       <Styled.Column>
         <Link href="/terms-and-conditions">Terms and Conditions</Link>
         <Link href="/privacy-policy">
@@ -15,6 +14,7 @@ export const Footer = () => {
           <Styled.Anchor>Disclaimer</Styled.Anchor>
         </Link>
       </Styled.Column>
+      <Styled.Column></Styled.Column>
     </Styled.Container>
   );
 };

@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  height: 100px;
+  height: 140px;
 `;
 
 export const Column = styled.div`
@@ -13,7 +13,9 @@ export const Column = styled.div`
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  text-align: left;
+  /* text-align: left; */
+  /* padding: 20px; */
+  align-items: center;
 `;
 
 export const Anchor = styled.a``;

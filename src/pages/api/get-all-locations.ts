@@ -29,6 +29,7 @@ async function getLatLong(location) {
     `https://maps.googleapis.com/maps/api/geocode/json?address=${location.city}&key=${process.env.GOOGLE_API}`
   );
   const data = await response.json();
+
   return {
     lat: data.results[0].geometry.location.lat,
     lng: data.results[0].geometry.location.lng,

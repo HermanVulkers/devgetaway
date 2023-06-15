@@ -6,7 +6,8 @@ export const AccountButtons = () => {
   return (
     <Styled.Container>
       <Styled.Button
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           signIn();
         }}
       >
