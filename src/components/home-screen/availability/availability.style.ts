@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 100%;
   background-color: #aaf5ff;
-  height: 50px;
+  height: 60px;
   column-gap: 10px;
   /* overflow: visible; */
   /* z-index: 100; */

@@ -6,9 +6,8 @@ import { Button, Popover } from '@mantine/core';
 export const Availability = () => {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
 
-  // Take the date values and convert to a string in this format "DD MMM - DD MMM"
-
   const dateRange = value
+    .filter((date) => date !== null)
     .map((date) =>
       date?.toLocaleDateString('en-GB', {
         day: 'numeric',
@@ -23,7 +22,7 @@ export const Availability = () => {
       <Popover position="bottom" withArrow shadow="md">
         <Popover.Target>
           <Button variant="outline" compact>
-            {dateRange}
+            {dateRange ? dateRange : 'Select a date range'}
           </Button>
         </Popover.Target>
         <Popover.Dropdown>

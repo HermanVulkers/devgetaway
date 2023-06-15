@@ -66,12 +66,12 @@ export const HomeMap = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://ip-api.com/json')
+    fetch('https://freeipapi.com/api/json')
       .then((response) => response.json())
       .then((data) => {
         setViewState({
-          latitude: data.lat,
-          longitude: data.lon,
+          latitude: data.latitude,
+          longitude: data.longitude,
           zoom: 3,
         });
       })
@@ -83,10 +83,10 @@ export const HomeMap = () => {
       <Styled.MapContainer>
         <Map
           {...viewState}
-          minZoom={1}
-          mapStyle="mapbox://styles/mapbox/streets-v12"
           mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-          style={{ width: '100%', height: '100%' }}
+          mapStyle="mapbox://styles/mapbox/streets-v12"
+          minZoom={1}
+          onMove={(e) => setViewState(e.viewState)}
           scrollZoom={false}
         >
           {locations.map((location) => {
