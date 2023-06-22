@@ -22,6 +22,7 @@
     "@types/node": "18.15.9",
     "@types/react": "18.0.29",
     "@types/react-dom": "18.0.11",
+    "@vercel/analytics": "^1.0.1",
     "aws-sdk": "^2.1381.0",
     "base64-js": "^1.5.1",
     "dayjs": "^1.11.7",

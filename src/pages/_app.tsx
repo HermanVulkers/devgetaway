@@ -1,5 +1,6 @@
 import { GlobalStyle } from '@/styles/globalStyle';
 import type { AppProps } from 'next/app';
+import { Analytics } from '@vercel/analytics/react';
 import { SessionProvider } from 'next-auth/react';
 import { UserProvider } from '@/context/user-context';
 import { MantineProvider } from '@mantine/core';
@@ -30,6 +31,7 @@ export default function App({
           >
             <GlobalStyle />
             <Component {...pageProps} />
+            <Analytics />
           </MantineProvider>
         </UserProvider>
       </SessionProvider>
