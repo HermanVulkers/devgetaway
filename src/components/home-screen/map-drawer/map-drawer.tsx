@@ -62,6 +62,7 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
                 fontWeight: 500,
                 paddingLeft: 15,
                 paddingRight: 15,
+                fontSize: 13,
               },
             })}
           >

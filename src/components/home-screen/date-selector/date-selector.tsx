@@ -39,9 +39,11 @@ export const DateSelector = ({ text, variant }: DateSelectorProps) => {
           compact
           styles={(theme) => ({
             root: {
+              fontSize: 13,
               fontWeight: 500,
               paddingLeft: 15,
               paddingRight: 15,
+              opacity: 0.9,
             },
           })}
         >

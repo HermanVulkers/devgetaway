@@ -77,7 +77,7 @@ export const HomeMap = () => {
                 anchor="bottom"
               >
                 <Styled.MapPinWrapper>
-                  <MapPin fill="#aaf5ff" />
+                  <MapPin strokeWidth={1} fill={'white'} size={28} />
                 </Styled.MapPinWrapper>
               </Marker>
             );

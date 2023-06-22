@@ -4,15 +4,12 @@ import Image from 'next/image';
 import * as Styled from './header.style';
 import { AccountMenu } from './account-menu/account-menu';
 
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { DateSelector } from '@/components/home-screen/date-selector/date-selector';
 import { Button } from '@mantine/core';
 import { Diamond } from 'tabler-icons-react';
 
 export const Header = () => {
-  const router = useRouter();
-
   return (
     <Styled.Container>
       <Styled.LeftWrapper>
@@ -36,6 +33,7 @@ export const Header = () => {
               fontWeight: 500,
               paddingLeft: 15,
               paddingRight: 15,
+              fontSize: 13,
             },
           })}
         >

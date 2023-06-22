@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -40,4 +40,15 @@ export const MapPinWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+
+  svg {
+    filter: drop-shadow(0px 5px 1px rgb(0 0 0 / 0.2));
+  }
+
+  transition: transform 0.1s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
