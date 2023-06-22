@@ -5,7 +5,7 @@ import { Header } from '../common/header/header';
 import { HomeMap } from './home-map/home-map';
 
 import { Footer } from '../common/footer/footer';
-import { Availability } from './availability/availability';
+import { DateSelector } from './date-selector/date-selector';
 import { LoadingOverlay } from '@mantine/core';
 
 export const HomeScreen = () => {
@@ -18,7 +18,9 @@ export const HomeScreen = () => {
   return (
     <Styled.Container>
       <Header />
-      <Availability />
+      <Styled.FilterBar>
+        <DateSelector text="Filter by date" />
+      </Styled.FilterBar>
       <HomeMap />
       <Footer />
     </Styled.Container>

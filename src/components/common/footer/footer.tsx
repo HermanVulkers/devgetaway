@@ -7,12 +7,8 @@ export const Footer = () => {
       <Styled.Column></Styled.Column>
       <Styled.Column>
         <Link href="/terms-and-conditions">Terms and Conditions</Link>
-        <Link href="/privacy-policy">
-          <Styled.Anchor>Privacy Policy</Styled.Anchor>
-        </Link>
-        <Link href="/disclaimer">
-          <Styled.Anchor>Disclaimer</Styled.Anchor>
-        </Link>
+        <Link href="/privacy-policy">Privacy Policy</Link>
+        <Link href="/disclaimer">Disclaimer</Link>
       </Styled.Column>
       <Styled.Column></Styled.Column>
     </Styled.Container>

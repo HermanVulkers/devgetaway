@@ -34,8 +34,6 @@ export const Amenities = styled.div`
   gap: 10px;
   border-radius: 5px;
   padding: 10px 20px;
-
-  /* background-color: #aaf5ff; */
 `;
 
 export const DeveloperAmenities = styled.div`

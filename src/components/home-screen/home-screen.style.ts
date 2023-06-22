@@ -9,6 +9,17 @@ export const Container = styled.div`
   height: 100vh;
 `;
 
+export const FilterBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #aaf5ff;
+  height: 70px;
+  column-gap: 5px;
+`;
+
 export const Button = styled.button`
   background-color: #565656;
   border-radius: 5px;

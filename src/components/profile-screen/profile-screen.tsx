@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react';
 import { Header } from '../common/header/header';
 import * as Styled from './profile-screen.style';
 

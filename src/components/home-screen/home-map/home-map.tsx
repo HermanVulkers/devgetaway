@@ -1,9 +1,10 @@
 import * as Styled from './home-map.style';
-import Map, { Marker, NavigationControl, Popup } from 'react-map-gl';
+import Map, { Marker, NavigationControl } from 'react-map-gl';
 import { useEffect, useState } from 'react';
 
 import { MapPin } from 'tabler-icons-react';
-import { useRouter } from 'next/router';
+
+import { MapDrawer } from '../map-drawer/map-drawer';
 
 interface Location {
   city: string;
@@ -15,46 +16,16 @@ interface Location {
 }
 
 export const HomeMap = () => {
-  const [popupInfo, setPopupInfo] = useState<Location>(null);
   const [locations, setLocations] = useState<Location[]>([]);
   const [viewState, setViewState] = useState({
     latitude: 0,
     longitude: 0,
     zoom: 1,
   });
-  const router = useRouter();
-
-  const handleLocationClick = (homeId: string) => {
-    router.push(`/getaway/${homeId}`);
-  };
-
-  const renderPopup = () => {
-    return (
-      popupInfo && (
-        <Popup
-          anchor="top"
-          longitude={popupInfo.longitude}
-          latitude={popupInfo.latitude}
-          closeButton={false}
-          onClose={() => setPopupInfo(null)}
-        >
-          <Styled.PopupContainer>
-            <Styled.PopupDetails>
-              <Styled.PopupLocation>{popupInfo.city}</Styled.PopupLocation>
-              <Styled.PopupFirstName>
-                {popupInfo.fullName}
-              </Styled.PopupFirstName>
-              <Styled.ViewGetawayButton
-                onClick={() => handleLocationClick(popupInfo.homeId)}
-              >
-                View destination
-              </Styled.ViewGetawayButton>
-            </Styled.PopupDetails>
-          </Styled.PopupContainer>
-        </Popup>
-      )
-    );
-  };
+  const [drawerData, setDrawerData] = useState<{
+    opened: boolean;
+    data: Location | null;
+  }>({ opened: false, data: null });
 
   useEffect(() => {
     fetch('/api/get-all-locations')
@@ -62,7 +33,9 @@ export const HomeMap = () => {
       .then((data) => {
         setLocations(data);
       })
-      .catch((error) => console.log('An error occurred: ', error));
+      .catch((error) => {
+        console.log('An error occurred: ', error);
+      });
   }, []);
 
   useEffect(() => {
@@ -81,11 +54,13 @@ export const HomeMap = () => {
   return (
     <Styled.Container>
       <Styled.MapContainer>
+        <MapDrawer drawerData={drawerData} setDrawerData={setDrawerData} />
         <Map
           {...viewState}
           mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
           mapStyle="mapbox://styles/mapbox/streets-v12"
           minZoom={1}
+          onClick={() => setDrawerData({ opened: false, data: null })}
           onMove={(e) => setViewState(e.viewState)}
           scrollZoom={false}
         >
@@ -95,18 +70,19 @@ export const HomeMap = () => {
                 key={location.homeId}
                 longitude={location.longitude}
                 latitude={location.latitude}
-                onClick={() => console.log('clicked')}
+                onClick={(event) => {
+                  event.originalEvent.stopPropagation();
+                  setDrawerData({ opened: true, data: location });
+                }}
                 anchor="bottom"
               >
-                <Styled.MarkerWrapper
-                  onMouseEnter={() => setPopupInfo(location)}
-                >
-                  <MapPin fill="white" />
-                </Styled.MarkerWrapper>
+                <Styled.MapPinWrapper>
+                  <MapPin fill="#aaf5ff" />
+                </Styled.MapPinWrapper>
               </Marker>
             );
           })}
-          {renderPopup()}
+
           <Styled.NavigationControlContainer>
             <NavigationControl showCompass={false} />
           </Styled.NavigationControlContainer>

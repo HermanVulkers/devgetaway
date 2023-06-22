@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
+  height: 70px;
   background-color: #f1faee;
   padding: 0 20px;
 `;
@@ -19,6 +19,8 @@ export const LeftWrapper = styled.div`
 export const RightWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  column-gap: 20px;
 `;
 
 export const Navigation = styled.nav`

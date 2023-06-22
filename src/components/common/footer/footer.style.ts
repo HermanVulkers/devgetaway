@@ -18,4 +18,4 @@ export const Column = styled.div`
   align-items: center;
 `;
 
-export const Anchor = styled.a``;
+export const Anchor = styled.p``;

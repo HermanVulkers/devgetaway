@@ -1,14 +1,14 @@
-import { Menu, Avatar, UnstyledButton } from '@mantine/core';
+import { Menu, Avatar, UnstyledButton, Loader } from '@mantine/core';
 import { Settings, MessageCircle, Home, Logout } from 'tabler-icons-react';
 
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { User } from '@/types/user';
 
 export const AccountMenu = () => {
   const router = useRouter();
 
-  const { data } = useSession();
+  const { data, status } = useSession();
+  if (status === 'loading') return <Loader />;
 
   const userImage = data?.user?.image;
   const userName = data?.user?.name ?? '';
@@ -18,7 +18,7 @@ export const AccountMenu = () => {
   };
 
   return (
-    <Menu shadow="md" width={200} offset={10}>
+    <Menu position="bottom-end" width={200}>
       <Menu.Target>
         <UnstyledButton>
           <Avatar alt={userName} src={userImage} radius="xl" />

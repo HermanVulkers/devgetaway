@@ -2,8 +2,6 @@ import { toTitleCase } from '@/utils/to-title-case';
 import { Footer } from '../common/footer/footer';
 import { Header } from '../common/header/header';
 import * as Styled from './getaway-screen.style';
-import { Grid, SimpleGrid } from '@mantine/core';
-import { Carousel } from '@mantine/carousel';
 
 export default function GetawayScreen({ home }) {
   const amenities = Object.entries(home?.amenities || {})
