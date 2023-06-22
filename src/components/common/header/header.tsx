@@ -23,8 +23,8 @@ export const Header = () => {
       <Styled.RightWrapper>
         <DateSelector text="Set availibility" variant="availibility" />
         <Button
-          variant="gradient"
-          gradient={{ from: 'yellow', to: 'red', deg: 60 }}
+          variant="outline"
+          // gradient={{ from: 'yellow', to: 'red', deg: 60 }}
           leftIcon={<Diamond size={18} />}
           radius="xl"
           compact
