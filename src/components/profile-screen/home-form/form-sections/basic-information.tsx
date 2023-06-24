@@ -8,28 +8,28 @@ interface BasicInformationProps {
   form: UseFormReturnType<FormValues>;
 }
 
-interface CitySuggestion {
+interface AddressSuggestion {
   description: string;
 }
 
 export const BasicInformation = ({ form }: BasicInformationProps) => {
-  const [citySuggestions, setCitySuggestions] = useState<CitySuggestion[]>([]);
-  const [citySearchValue, onCitySearchChange] = useState('');
+  const [addressSuggestions, setAddressSuggestions] = useState<
+    AddressSuggestion[]
+  >([]);
+  const [addressSearchValue, onAddressSearchChange] = useState('');
 
   useEffect(() => {
-    if (citySearchValue) {
-      fetch(
-        `/api/city-autocomplete?input=${encodeURIComponent(citySearchValue)}`
-      )
+    if (addressSearchValue) {
+      fetch(`/api/address-autocomplete?input=${addressSearchValue}`)
         .then((response) => response.json())
         .then((data) => {
-          setCitySuggestions(data.predictions);
+          setAddressSuggestions(data.predictions);
         })
         .catch((error) => {
           console.error('Error fetching suggestions', error);
         });
     }
-  }, [citySearchValue]);
+  }, [addressSearchValue]);
 
   return (
     <>
@@ -43,16 +43,16 @@ export const BasicInformation = ({ form }: BasicInformationProps) => {
       />
       <Select
         icon={<BuildingCommunity size={20} />}
-        label="City"
-        description="This is used to indicate your location on the map for other users to find you."
+        label="Street Address"
+        description="No need to fill in your house number. This is used to indicate your location on the map for other users to find you. "
         radius="md"
-        placeholder={form.values.city || 'Search for your city'}
+        placeholder={form.values.address || 'Search for your address'}
         required
-        onSearchChange={onCitySearchChange}
-        searchValue={citySearchValue}
-        data={citySuggestions.map((suggestion) => suggestion.description)}
+        onSearchChange={onAddressSearchChange}
+        searchValue={addressSearchValue}
+        data={addressSuggestions.map((suggestion) => suggestion.description)}
         searchable
-        {...form.getInputProps('city')}
+        {...form.getInputProps('address')}
       />
       <Select
         icon={<Home size={20} />}

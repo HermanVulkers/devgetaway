@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       params: {
         input,
         key: process.env.GOOGLE_API,
-        types: ['(cities)'],
+        types: ['address'],
       },
     });
 

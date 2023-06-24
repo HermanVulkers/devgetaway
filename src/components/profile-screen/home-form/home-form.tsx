@@ -25,7 +25,7 @@ export const HomeForm = () => {
   const homeForm = useForm({
     initialValues: {
       description: '',
-      city: '',
+      address: '',
       propertyType: '',
       photos: [],
       amenities: {

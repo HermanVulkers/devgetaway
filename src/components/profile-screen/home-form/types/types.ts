@@ -1,6 +1,6 @@
 export interface FormValues {
   description: string;
-  city: string;
+  address: string;
   propertyType: string;
   photos: File[];
   deleveloperAmenities: {

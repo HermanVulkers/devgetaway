@@ -79,7 +79,7 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
         )} */}
 
           <Skeleton visible={isFetching}>
-            <h4>{home?.city}</h4>
+            <h4>{home?.address}</h4>
           </Skeleton>
 
           <Skeleton visible={isFetching}>

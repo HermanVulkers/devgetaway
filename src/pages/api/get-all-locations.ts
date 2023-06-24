@@ -17,7 +17,7 @@ function matchUsersToHomes(users, homes) {
     );
     return {
       fullName: user.name,
-      city: home.city,
+      address: home.address,
       homeId: home._id,
       userId: user._id,
     };
@@ -26,7 +26,7 @@ function matchUsersToHomes(users, homes) {
 
 async function getLatLong(location) {
   const response = await fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${location.city}&key=${process.env.GOOGLE_API}`
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${location.address}&key=${process.env.GOOGLE_API}`
   );
   const data = await response.json();
 

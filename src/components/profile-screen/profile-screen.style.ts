@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: white;
+  background-color: aliceblue;
 `;
 
 export const ContentContainer = styled.div`
@@ -12,12 +13,13 @@ export const ContentContainer = styled.div`
   flex-direction: row;
   width: 100%;
   height: 100%;
+  justify-content: center;
 `;
 
 export const House = styled.div`
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 60%;
   height: 100%;
   background-color: aliceblue;
   padding: 30px;

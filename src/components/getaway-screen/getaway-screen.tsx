@@ -24,7 +24,7 @@ export default function GetawayScreen({ home }) {
     <>
       <Header />
       <Styled.Container>
-        <h1>{home?.city}</h1>
+        <h1>{home?.address}</h1>
 
         <p>{home?.description}</p>
 

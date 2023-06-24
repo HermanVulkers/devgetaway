@@ -14,9 +14,9 @@ export const ProfileScreen = () => {
           <HomeForm />
         </Styled.House>
 
-        <Styled.AboutMe>
+        {/* <Styled.AboutMe>
           <AboutMeForm />
-        </Styled.AboutMe>
+        </Styled.AboutMe> */}
       </Styled.ContentContainer>
     </Styled.Container>
   );

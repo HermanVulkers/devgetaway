@@ -7,7 +7,7 @@ import { MapPin } from 'tabler-icons-react';
 import { MapDrawer } from '../map-drawer/map-drawer';
 
 interface Location {
-  city: string;
+  address: string;
   fullName: string;
   homeId: string;
   userId: string;
@@ -26,12 +26,14 @@ export const HomeMap = () => {
     opened: boolean;
     data: Location | null;
   }>({ opened: false, data: null });
+  const [markersFetched, setMarkersFetched] = useState(false); // Flag to track marker fetching
 
   useEffect(() => {
     fetch('/api/get-all-locations')
       .then((res) => res.json())
       .then((data) => {
         setLocations(data);
+        setMarkersFetched(true); // Markers fetched successfully
       })
       .catch((error) => {
         console.log('An error occurred: ', error);
@@ -76,7 +78,9 @@ export const HomeMap = () => {
                 }}
                 anchor="bottom"
               >
-                <Styled.MapPinWrapper>
+                <Styled.MapPinWrapper
+                  className={markersFetched ? 'animate' : ''}
+                >
                   <MapPin strokeWidth={1} fill={'white'} size={28} />
                 </Styled.MapPinWrapper>
               </Marker>

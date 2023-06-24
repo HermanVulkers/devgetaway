@@ -75,11 +75,11 @@ export const Photos = ({
     <>
       <FileInput
         icon={<Upload size={20} />}
-        description="Choose either a .png or .jpeg file."
-        placeholder="Upload photos"
+        description="Choose either a .png or .jpeg file. Maximum total file size is 10MB. Maximum number of photos is 10."
+        placeholder="Click to upload photos"
         multiple
         accept="image/png,image/jpeg"
-        {...form.getInputProps('photos')}
+        // {...form.getInputProps('photos')}
         onChange={onInputChange}
       />
       <Grid mt="md" grow>
