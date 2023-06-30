@@ -1,6 +1,6 @@
 import * as Styled from './home-map.style';
-import Map, { Marker, NavigationControl } from 'react-map-gl';
-import { useEffect, useState } from 'react';
+import Map, { Marker, NavigationControl, Source } from 'react-map-gl';
+import { useEffect, useMemo, useState } from 'react';
 
 import { MapPin } from 'tabler-icons-react';
 
@@ -15,7 +15,11 @@ interface Location {
   longitude: number;
 }
 
-export const HomeMap = () => {
+interface HomeMapProps {
+  disableMarkerInteraction?: boolean;
+}
+
+export const HomeMap = ({ disableMarkerInteraction }: HomeMapProps) => {
   const [locations, setLocations] = useState<Location[]>([]);
   const [viewState, setViewState] = useState({
     latitude: 0,
@@ -73,8 +77,10 @@ export const HomeMap = () => {
                 longitude={location.longitude}
                 latitude={location.latitude}
                 onClick={(event) => {
-                  event.originalEvent.stopPropagation();
-                  setDrawerData({ opened: true, data: location });
+                  if (!disableMarkerInteraction) {
+                    event.originalEvent.stopPropagation();
+                    setDrawerData({ opened: true, data: location });
+                  }
                 }}
                 anchor="bottom"
               >

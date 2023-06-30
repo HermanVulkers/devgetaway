@@ -9,6 +9,7 @@ import { DeveloperAmenities } from './form-sections/developer-amenities';
 import { Photos } from './form-sections/photos';
 import { useSession } from 'next-auth/react';
 import { validatePhotoUpload } from './helpers/validate-photo-upload';
+import { FileWithPath } from '@mantine/dropzone';
 
 export const HomeForm = () => {
   const {
@@ -91,8 +92,7 @@ export const HomeForm = () => {
 
     homeForm.getInputProps('photos').onChange(files);
 
-    const fileArray = Array.from(files);
-    const blobUrls = fileArray.map((file) => URL.createObjectURL(file));
+    const blobUrls = files.map((file) => URL.createObjectURL(file));
     setPhotoBlobUrls(blobUrls);
   };
 

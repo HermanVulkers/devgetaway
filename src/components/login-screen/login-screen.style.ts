@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-color: #fafffd;
+  width: 100%;
+  background-color: #f1faee;
+  height: 100vh;
 `;
 
 export const MapContainer = styled.div`

@@ -10,6 +10,7 @@ export const Container = styled.div`
   height: fit-content;
   padding: 10px;
   align-items: center;
+  font-size: 13px;
 `;
 
 export const Highlight = styled.div`

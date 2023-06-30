@@ -5,16 +5,17 @@ import { MapBox } from './map/map';
 import { Steps } from './steps/steps';
 import { AccountButtons } from './account-buttons/account-buttons';
 import { AppHighlights } from './app-highlights/app-highlights';
+import { HomeMap } from '../home-screen/home-map/home-map';
+import { Footer } from '../common/footer/footer';
 
 export const LoginScreen = () => {
   return (
     <Styled.Container>
-      <AccountButtons />
       <Header />
       <AppHighlights />
-      <MapBox />
+      <HomeMap disableMarkerInteraction />
 
-      <Steps />
+      <Footer />
     </Styled.Container>
   );
 };
