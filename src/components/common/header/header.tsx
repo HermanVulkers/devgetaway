@@ -5,7 +5,7 @@ import * as Styled from './header.style';
 import { AccountMenu } from './account-menu/account-menu';
 
 import Link from 'next/link';
-import { DateSelector } from '@/components/home-screen/date-selector/date-selector';
+import { AvailabilitySetter } from '@/components/home-screen/availability-setter/availability-setter';
 import { Button } from '@mantine/core';
 import { Diamond } from 'tabler-icons-react';
 
@@ -21,7 +21,7 @@ export const Header = () => {
         {/* <Link href="/">Pricing</Link> */}
       </Styled.Navigation>
       <Styled.RightWrapper>
-        <DateSelector text="Set availibility" variant="availibility" />
+        <AvailabilitySetter />
         <Button
           variant="outline"
           // gradient={{ from: 'yellow', to: 'red', deg: 60 }}

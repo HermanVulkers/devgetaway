@@ -27,6 +27,8 @@ export default async function handler(req, res) {
   const homesCollection = await connectToDatabase('homes');
   const home = await homesCollection.findOne({ userId: user._id.toString() });
 
+  console.log('home', home);
+
   if (!home) {
     res.status(404).json({ message: 'Home not found' });
     return;

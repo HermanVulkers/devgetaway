@@ -1,15 +1,10 @@
 import { DatePicker } from '@mantine/dates';
-import * as Styled from './date-selector.style';
+import * as Styled from './date-filter.style';
 import { useState } from 'react';
 import { Button, Popover } from '@mantine/core';
 import { Calendar, Home, Plane } from 'tabler-icons-react';
 
-interface DateSelectorProps {
-  text: string;
-  variant?: 'availibility' | 'filter';
-}
-
-export const DateSelector = ({ text, variant }: DateSelectorProps) => {
+export const DateFilter = () => {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
 
   const dateRange = value
@@ -26,16 +21,10 @@ export const DateSelector = ({ text, variant }: DateSelectorProps) => {
     <Popover position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button
-          variant={variant === 'availibility' ? 'gradient' : 'outline'}
+          variant="gradient"
           gradient={{ from: 'teal', to: 'blue', deg: 60 }}
           radius="xl"
-          leftIcon={
-            variant === 'availibility' ? (
-              <Home size={18} />
-            ) : (
-              <Calendar size={18} />
-            )
-          }
+          leftIcon={<Calendar size={18} />}
           compact
           styles={(theme) => ({
             root: {
@@ -47,7 +36,7 @@ export const DateSelector = ({ text, variant }: DateSelectorProps) => {
             },
           })}
         >
-          {dateRange ? dateRange : text}
+          {dateRange ? dateRange : 'Filter by availability'}
         </Button>
       </Popover.Target>
       <Popover.Dropdown>

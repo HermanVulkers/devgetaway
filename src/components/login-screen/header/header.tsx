@@ -15,14 +15,11 @@ export const Header = () => {
             e.preventDefault();
             signIn();
           }}
-          variant="gradient"
-          gradient={{ from: 'teal', to: 'blue', deg: 60 }}
           styles={{
             root: {
               position: 'absolute',
               right: 20,
               top: 20,
-              backgroundColor: '#a8dadc',
             },
           }}
         >

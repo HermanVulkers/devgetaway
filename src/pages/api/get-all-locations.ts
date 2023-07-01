@@ -20,6 +20,8 @@ function matchUsersToHomes(users, homes) {
       address: home.address,
       homeId: home._id,
       userId: user._id,
+      startDate: home.startDate,
+      endDate: home.endDate,
     };
   });
 }

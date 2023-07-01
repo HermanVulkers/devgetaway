@@ -5,8 +5,9 @@ import { Header } from '../common/header/header';
 import { HomeMap } from './home-map/home-map';
 
 import { Footer } from '../common/footer/footer';
-import { DateSelector } from './date-selector/date-selector';
+import { AvailabilitySetter } from './availability-setter/availability-setter';
 import { LoadingOverlay } from '@mantine/core';
+import { DateFilter } from './date-filter/date-filter';
 
 export const HomeScreen = () => {
   const { status } = useSession();
@@ -19,7 +20,7 @@ export const HomeScreen = () => {
     <Styled.Container>
       <Header />
       <Styled.FilterBar>
-        <DateSelector text="Filter by date" />
+        <DateFilter />
       </Styled.FilterBar>
       <HomeMap />
       <Footer />
