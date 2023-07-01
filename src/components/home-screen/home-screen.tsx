@@ -5,12 +5,28 @@ import { Header } from '../common/header/header';
 import { HomeMap } from './home-map/home-map';
 
 import { Footer } from '../common/footer/footer';
-import { AvailabilitySetter } from './availability-setter/availability-setter';
 import { LoadingOverlay } from '@mantine/core';
 import { DateFilter } from './date-filter/date-filter';
+import { useEffect, useState } from 'react';
+import { Location } from '../../types/location';
 
 export const HomeScreen = () => {
   const { status } = useSession();
+  const [locations, setLocations] = useState<Location[]>([]);
+
+  const [markersFetched, setMarkersFetched] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/get-all-locations')
+      .then((res) => res.json())
+      .then((data) => {
+        setLocations(data);
+        setMarkersFetched(true);
+      })
+      .catch((error) => {
+        console.log('An error occurred: ', error);
+      });
+  }, []);
 
   if (status === 'loading') {
     return <LoadingOverlay visible />;
@@ -20,9 +36,9 @@ export const HomeScreen = () => {
     <Styled.Container>
       <Header />
       <Styled.FilterBar>
-        <DateFilter />
+        <DateFilter locations={locations} setLocations={setLocations} />
       </Styled.FilterBar>
-      <HomeMap />
+      <HomeMap locations={locations} markersFetched={markersFetched} />
       <Footer />
     </Styled.Container>
   );

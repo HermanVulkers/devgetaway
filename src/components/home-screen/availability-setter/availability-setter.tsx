@@ -50,7 +50,6 @@ export const AvailabilitySetter = ({}: AvailabilitySetterProps) => {
   };
 
   useEffect(() => {
-    // Make a request to the backend API to get the home data
     fetch('/api/get-home')
       .then((response) => response.json())
       .then((data) => {
@@ -61,13 +60,15 @@ export const AvailabilitySetter = ({}: AvailabilitySetterProps) => {
           const endDate = new Date(data.endDate);
           setValue([startDate, endDate]);
 
-          const range = `${startDate.toLocaleDateString('en-GB', {
+          const formattedStartDate = startDate.toLocaleDateString('en-GB', {
             day: 'numeric',
             month: 'short',
-          })} - ${endDate.toLocaleDateString('en-GB', {
+          });
+          const formattedEndDate = endDate.toLocaleDateString('en-GB', {
             day: 'numeric',
             month: 'short',
-          })}`;
+          });
+          const range = `${formattedStartDate} - ${formattedEndDate}`;
           setDateRange(range);
         }
       })

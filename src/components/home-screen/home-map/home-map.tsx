@@ -6,21 +6,19 @@ import { MapPin } from 'tabler-icons-react';
 
 import { MapDrawer } from '../map-drawer/map-drawer';
 
-interface Location {
-  address: string;
-  fullName: string;
-  homeId: string;
-  userId: string;
-  latitude: number;
-  longitude: number;
-}
+import { Location } from '../../../types/location';
 
 interface HomeMapProps {
   disableMarkerInteraction?: boolean;
+  locations: Location[];
+  markersFetched?: boolean;
 }
 
-export const HomeMap = ({ disableMarkerInteraction }: HomeMapProps) => {
-  const [locations, setLocations] = useState<Location[]>([]);
+export const HomeMap = ({
+  locations,
+  disableMarkerInteraction,
+  markersFetched,
+}: HomeMapProps) => {
   const [viewState, setViewState] = useState({
     latitude: 0,
     longitude: 0,
@@ -30,19 +28,6 @@ export const HomeMap = ({ disableMarkerInteraction }: HomeMapProps) => {
     opened: boolean;
     data: Location | null;
   }>({ opened: false, data: null });
-  const [markersFetched, setMarkersFetched] = useState(false); // Flag to track marker fetching
-
-  useEffect(() => {
-    fetch('/api/get-all-locations')
-      .then((res) => res.json())
-      .then((data) => {
-        setLocations(data);
-        setMarkersFetched(true); // Markers fetched successfully
-      })
-      .catch((error) => {
-        console.log('An error occurred: ', error);
-      });
-  }, []);
 
   useEffect(() => {
     fetch('https://freeipapi.com/api/json')
