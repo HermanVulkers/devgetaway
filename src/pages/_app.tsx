@@ -1,9 +1,10 @@
-import { GlobalStyle } from '@/styles/globalStyle';
-import type { AppProps } from 'next/app';
-import { Analytics } from '@vercel/analytics/react';
-import { SessionProvider } from 'next-auth/react';
-import { UserProvider } from '@/context/user-context';
 import { MantineProvider } from '@mantine/core';
+import { Analytics } from '@vercel/analytics/react';
+import type { AppProps } from 'next/app';
+import { SessionProvider } from 'next-auth/react';
+
+import { UserProvider } from '@/context/user-context';
+import { GlobalStyle } from '@/styles/globalStyle';
 
 export default function App({
   Component,

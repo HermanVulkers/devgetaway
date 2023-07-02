@@ -1,16 +1,17 @@
-import { useForm } from '@mantine/form';
 import {
-  TextInput,
-  Textarea,
   Button,
-  Group,
-  Image,
   FileInput,
   Grid,
+  Group,
+  Image,
+  Textarea,
+  TextInput,
 } from '@mantine/core';
-import * as Styled from './profile-screen.style';
-import { Upload } from 'tabler-icons-react';
+import { useForm } from '@mantine/form';
 import { useState } from 'react';
+import { Upload } from 'tabler-icons-react';
+
+import * as Styled from './profile-screen.style';
 
 export const AboutMeForm = () => {
   const [imagePreviews, setImagePreviews] = useState([]);
@@ -23,7 +24,7 @@ export const AboutMeForm = () => {
   };
 
   return (
-    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={form.onSubmit((values) => console.log(values))}>
       <Styled.FormSection>
         <h4>About you</h4>
         <TextInput

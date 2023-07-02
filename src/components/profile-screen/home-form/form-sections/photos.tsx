@@ -1,16 +1,14 @@
 import {
   ActionIcon,
+  Badge,
   FileInput,
   Grid,
   Image,
-  Badge,
-  Loader,
 } from '@mantine/core';
 import { Upload } from 'tabler-icons-react';
 import { TrashX } from 'tabler-icons-react';
 
 import * as Styled from './photos.style';
-import { useState } from 'react';
 
 interface PhotosProps {
   form: any;

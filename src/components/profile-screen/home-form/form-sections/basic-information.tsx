@@ -1,8 +1,9 @@
-import { Select, Textarea, TextInput } from '@mantine/core';
+import { Select, Textarea } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
+import { useCallback, useEffect, useMemo,useState } from 'react';
 import { BuildingCommunity, Home } from 'tabler-icons-react';
+
 import { FormValues } from '../types/types';
-import { useEffect, useState } from 'react';
 
 interface BasicInformationProps {
   form: UseFormReturnType<FormValues>;
@@ -13,10 +14,28 @@ interface AddressSuggestion {
 }
 
 export const BasicInformation = ({ form }: BasicInformationProps) => {
-  const [addressSuggestions, setAddressSuggestions] = useState<
-    AddressSuggestion[]
-  >([]);
-  const [addressSearchValue, onAddressSearchChange] = useState('');
+  const [addressSuggestions, setAddressSuggestions] = useState<AddressSuggestion[]>([]);
+  const [addressSearchValue, setAddressSearchValue] = useState('');
+  const [isAddressSearchCleared, setAddressSearchCleared] = useState(false);
+  const [isInitialLoad, setInitialLoad] = useState(true);
+
+  const handleAddressSearchChange = useCallback((value: string) => {
+    setAddressSearchValue(value);
+  }, []);
+
+  useEffect(() => {
+    if (isInitialLoad) {
+      setInitialLoad(false);
+    } else if (addressSearchValue === '') {
+      setAddressSearchCleared(true);
+    } else {
+      setAddressSearchCleared(false);
+    }
+  }, [addressSearchValue, isInitialLoad]);
+
+  useEffect(() => {
+    setAddressSearchValue(form.values.address);
+  }, [form.values.address]);
 
   useEffect(() => {
     if (addressSearchValue) {
@@ -31,6 +50,12 @@ export const BasicInformation = ({ form }: BasicInformationProps) => {
     }
   }, [addressSearchValue]);
 
+  const memoizedAddressSuggestions = useMemo(() => {
+    return addressSearchValue ? addressSuggestions.map((suggestion) => suggestion.description) : [];
+  }, [addressSearchValue, addressSuggestions]);
+
+  console.log('rendering basic information');
+
   return (
     <>
       <Textarea
@@ -42,17 +67,15 @@ export const BasicInformation = ({ form }: BasicInformationProps) => {
         required
       />
       <Select
+        {...form.getInputProps('address')}
         icon={<BuildingCommunity size={20} />}
         label="Street Address"
-        description="No need to fill in your house number. This is used to indicate your location on the map for other users to find you. "
-        radius="md"
-        placeholder={form.values.address || 'Search for your address'}
+        description="No need to fill in your house number. This is used to indicate your location on the map for other users to find you."
         required
-        onSearchChange={onAddressSearchChange}
-        searchValue={addressSearchValue}
-        data={addressSuggestions.map((suggestion) => suggestion.description)}
+        onSearchChange={handleAddressSearchChange}
+        searchValue={isAddressSearchCleared ? '' : addressSearchValue}
+        data={memoizedAddressSuggestions}
         searchable
-        {...form.getInputProps('address')}
       />
       <Select
         icon={<Home size={20} />}

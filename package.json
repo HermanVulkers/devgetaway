@@ -28,10 +28,8 @@
     "base64-js": "^1.5.1",
     "dayjs": "^1.11.7",
     "embla-carousel-react": "^8.0.0-rc07",
-    "emoji-mart": "^5.5.2",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
-    "firebase-admin": "^11.8.0",
     "mapbox-gl": "^2.13.0",
     "mongodb": "^5.1.0",
     "next": "13.2.4",
@@ -46,7 +44,10 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
-    "babel-plugin-styled-components": "^2.0.7"
+    "babel-plugin-styled-components": "^2.0.7",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0"
   },
   "resolutions": {
     "styled-components": "^5"

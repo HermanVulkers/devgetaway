@@ -1,7 +1,8 @@
 import { Checkbox, Select, SimpleGrid, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
-import { FormValues } from '../types/types';
 import { AppWindow, Wifi } from 'tabler-icons-react';
+
+import { FormValues } from '../types/types';
 
 export const DeveloperAmenities = ({
   form,

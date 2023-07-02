@@ -1,13 +1,13 @@
-import Logo from '../../../assets/logos/logo-no-background.png';
-import Image from 'next/image';
-
-import * as Styled from './header.style';
-import { AccountMenu } from './account-menu/account-menu';
-
-import Link from 'next/link';
-import { AvailabilitySetter } from '@/components/home-screen/availability-setter/availability-setter';
 import { Button } from '@mantine/core';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Diamond } from 'tabler-icons-react';
+
+import { AvailabilitySetter } from '@/components/home-screen/availability-setter/availability-setter';
+
+import Logo from '../../../assets/logos/logo-no-background.png';
+import { AccountMenu } from './account-menu/account-menu';
+import * as Styled from './header.style';
 
 export const Header = () => {
   return (

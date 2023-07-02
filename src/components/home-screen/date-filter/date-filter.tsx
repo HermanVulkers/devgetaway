@@ -27,7 +27,6 @@ export const DateFilter = ({ locations, setLocations }: DateFilterProps) => {
     }
 
     const filteredLocations = locations.filter((location) => {
-      // Filter the locations based on the date range logic
       const [startDate, endDate] = value;
       const locationStartDate = new Date(location.startDate);
       const locationEndDate = new Date(location.endDate);
@@ -39,7 +38,6 @@ export const DateFilter = ({ locations, setLocations }: DateFilterProps) => {
 
     setLocations(filteredLocations);
 
-    // Format the date range for display in the button
     if (value[0] && value[1]) {
       const formattedStartDate = value[0].toLocaleDateString('en-GB', {
         day: 'numeric',
@@ -55,14 +53,12 @@ export const DateFilter = ({ locations, setLocations }: DateFilterProps) => {
     }
   }, [value, setLocations, dateRange]);
 
-  console.log(locations);
-
   return (
     <>
       <Popover position="bottom" withArrow shadow="md">
         <Popover.Target>
           <Button
-            variant="gradient"
+            variant="outline"
             gradient={{ from: 'teal', to: 'blue', deg: 60 }}
             radius="xl"
             leftIcon={<Calendar size={18} />}

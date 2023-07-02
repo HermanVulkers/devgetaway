@@ -1,8 +1,9 @@
-import { DatePicker } from '@mantine/dates';
-import * as Styled from './availability-setter.style';
-import { useState, useEffect } from 'react';
 import { Button, Popover } from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
+import { useEffect, useState } from 'react';
 import { Calendar, Home } from 'tabler-icons-react';
+
+import * as Styled from './availability-setter.style';
 
 interface AvailabilitySetterProps {}
 
@@ -10,6 +11,7 @@ export const AvailabilitySetter = ({}: AvailabilitySetterProps) => {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
   const [dateRange, setDateRange] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isFetching, setIsFetching] = useState(false);
 
   const onDateChange = (dates: [Date | null, Date | null]) => {
     setValue(dates);
@@ -50,6 +52,8 @@ export const AvailabilitySetter = ({}: AvailabilitySetterProps) => {
   };
 
   useEffect(() => {
+    setIsFetching(true);
+
     fetch('/api/get-home')
       .then((response) => response.json())
       .then((data) => {
@@ -71,10 +75,13 @@ export const AvailabilitySetter = ({}: AvailabilitySetterProps) => {
           const range = `${formattedStartDate} - ${formattedEndDate}`;
           setDateRange(range);
         }
+
+        setIsFetching(false);
       })
       .catch((error) => {
         setError('Error fetching home data.');
         console.error(error);
+        setIsFetching(false);
       });
   }, []);
 
@@ -82,7 +89,7 @@ export const AvailabilitySetter = ({}: AvailabilitySetterProps) => {
     <Popover position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button
-          variant="outline"
+          variant="gradient"
           gradient={{ from: 'teal', to: 'blue', deg: 60 }}
           radius="xl"
           leftIcon={<Home size={18} />}
@@ -96,8 +103,9 @@ export const AvailabilitySetter = ({}: AvailabilitySetterProps) => {
               opacity: 0.9,
             },
           })}
+          loading={isFetching}
         >
-          {error ? error : dateRange || 'Set your availability'}
+          {dateRange ? dateRange : 'Set your availability'}
         </Button>
       </Popover.Target>
       <Popover.Dropdown>

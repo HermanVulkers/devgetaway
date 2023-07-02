@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react';
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const UserContext = createContext(null);
 

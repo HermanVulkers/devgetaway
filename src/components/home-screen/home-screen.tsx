@@ -1,14 +1,13 @@
-import { useSession } from 'next-auth/react';
-
-import * as Styled from './home-screen.style';
-import { Header } from '../common/header/header';
-import { HomeMap } from './home-map/home-map';
-
-import { Footer } from '../common/footer/footer';
 import { LoadingOverlay } from '@mantine/core';
-import { DateFilter } from './date-filter/date-filter';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+
 import { Location } from '../../types/location';
+import { Footer } from '../common/footer/footer';
+import { Header } from '../common/header/header';
+import { DateFilter } from './date-filter/date-filter';
+import { HomeMap } from './home-map/home-map';
+import * as Styled from './home-screen.style';
 
 export const HomeScreen = () => {
   const { status } = useSession();

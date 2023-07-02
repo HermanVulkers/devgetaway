@@ -1,15 +1,15 @@
-import { Button, Group, Loader, LoadingOverlay } from '@mantine/core';
+import { Button, Group, Loader } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+
 import * as Styled from '../profile-screen.style';
 import { submitHomeForm } from '../utils/submit-home-form';
-import { BasicInformation } from './form-sections/basic-information';
 import { Amenities } from './form-sections/amenities';
+import { BasicInformation } from './form-sections/basic-information';
 import { DeveloperAmenities } from './form-sections/developer-amenities';
 import { Photos } from './form-sections/photos';
-import { useSession } from 'next-auth/react';
 import { validatePhotoUpload } from './helpers/validate-photo-upload';
-import { FileWithPath } from '@mantine/dropzone';
 
 export const HomeForm = () => {
   const {
