@@ -33,6 +33,7 @@ export const AmenitiesContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
+  font-size: 14px;
 `;
 
 export const Amenities = styled.div`
@@ -40,7 +41,6 @@ export const Amenities = styled.div`
   flex-direction: column;
   gap: 10px;
   border-radius: 5px;
-  // no styling on list items
 `;
 
 export const AmenitiesList = styled.ul`
@@ -63,3 +63,10 @@ export const DevAmenitiesList = styled.ul`
 `;
 
 export const DevAmenitiesListItem = styled.li``;
+
+export const Verified = styled.span`
+  display: flex;
+
+  font-weight: bold;
+  color: #1d3557;
+`;

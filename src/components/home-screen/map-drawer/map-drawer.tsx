@@ -1,14 +1,22 @@
-import { Button, Drawer, Loader, Skeleton } from '@mantine/core';
+import { Button, Chip, Drawer, Loader, Skeleton } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import * as Styled from './map-drawer.style';
 
 import { toTitleCase } from '@/utils/to-title-case';
 import { Carousel } from '@mantine/carousel';
-import { Message2 } from 'tabler-icons-react';
+import {
+  CircleCheck,
+  Message2,
+  ArrowLeft,
+  ArrowRight,
+} from 'tabler-icons-react';
+import { Portal, Overlay } from '@mantine/core';
 
 export const MapDrawer = ({ drawerData, setDrawerData }) => {
   const [home, setHome] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [isPhotoOverlayOpen, setIsPhotoOverlayOpen] = useState(false);
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
 
   async function getHomeById() {
     setIsFetching(true);
@@ -44,6 +52,24 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
       }
     });
 
+  const closePhotoOverlay = () => {
+    setIsPhotoOverlayOpen(false);
+  };
+
+  const showNextPhoto = () => {
+    setSelectedPhotoIndex((prevIndex) =>
+      prevIndex === home?.s3PhotoUrls.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const showPreviousPhoto = () => {
+    setSelectedPhotoIndex((prevIndex) =>
+      prevIndex === 0 ? home?.s3PhotoUrls.length - 1 : prevIndex - 1
+    );
+  };
+
+  const homeStatus = home?.status === 'verified' ? 'verified' : 'pending';
+
   return (
     <Drawer.Root
       opened={drawerData.opened}
@@ -51,10 +77,13 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
     >
       <Drawer.Content>
         <Drawer.Header>
+          <Chip checked={homeStatus === 'verified' ? true : false}>
+            {homeStatus === 'verified'
+              ? 'Verified user'
+              : 'Verification pending'}
+          </Chip>
+
           <Button
-            variant={'gradient'}
-            gradient={{ from: 'teal', to: 'blue', deg: 60 }}
-            radius="xl"
             leftIcon={<Message2 size={24} strokeWidth={2} />}
             compact
             styles={(theme) => ({
@@ -63,21 +92,16 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
                 paddingLeft: 15,
                 paddingRight: 15,
                 fontSize: 13,
+                marginLeft: 15,
               },
             })}
           >
-            Contact owner
+            Contact user
           </Button>
 
           <Drawer.CloseButton size={24} />
         </Drawer.Header>
         <Styled.Container>
-          {/* {isFetching && (
-          <Styled.Loader>
-            <Loader size="sm" />
-          </Styled.Loader>
-        )} */}
-
           <Skeleton visible={isFetching}>
             <h4>{home?.address}</h4>
           </Skeleton>
@@ -87,12 +111,67 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
           </Skeleton>
 
           <Skeleton visible={isFetching}>
-            <Carousel mx="auto" withIndicators>
+            <Carousel
+              mx="auto"
+              withIndicators
+              nextControlIcon={<ArrowRight size={16} />}
+              previousControlIcon={<ArrowLeft size={16} />}
+            >
               {home?.s3PhotoUrls.map(({ url }, index) => (
-                <Styled.Photo key={index} src={url} />
+                <Styled.Photo
+                  key={index}
+                  src={url}
+                  onClick={() => {
+                    setSelectedPhotoIndex(index);
+                    setIsPhotoOverlayOpen(true);
+                  }}
+                />
               ))}
             </Carousel>
           </Skeleton>
+
+          {isPhotoOverlayOpen && (
+            <Portal>
+              <Overlay
+                zIndex={1000}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Button
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                    zIndex: 1001,
+                  }}
+                  onClick={closePhotoOverlay}
+                  compact
+                >
+                  Close
+                </Button>
+                <Carousel
+                  mx="auto"
+                  withIndicators
+                  nextControlIcon={<ArrowRight size={16} />}
+                  previousControlIcon={<ArrowLeft size={16} />}
+                >
+                  {home?.s3PhotoUrls.map(({ url }, index) => (
+                    <Styled.Photo
+                      key={index}
+                      src={url}
+                      onClick={() => {
+                        setSelectedPhotoIndex(index);
+                        setIsPhotoOverlayOpen(true);
+                      }}
+                    />
+                  ))}
+                </Carousel>
+              </Overlay>
+            </Portal>
+          )}
 
           <Styled.AmenitiesContainer>
             <Skeleton visible={isFetching}>

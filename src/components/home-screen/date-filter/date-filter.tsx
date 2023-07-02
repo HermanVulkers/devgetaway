@@ -59,8 +59,8 @@ export const DateFilter = ({ locations, setLocations }: DateFilterProps) => {
         <Popover.Target>
           <Button
             variant="outline"
-            gradient={{ from: 'teal', to: 'blue', deg: 60 }}
-            radius="xl"
+            // gradient={{ from: 'teal', to: 'blue', deg: 60 }}
+            // radius="xl"
             leftIcon={<Calendar size={18} />}
             compact
             styles={(theme) => ({

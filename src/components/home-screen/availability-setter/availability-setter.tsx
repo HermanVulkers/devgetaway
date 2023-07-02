@@ -89,9 +89,9 @@ export const AvailabilitySetter = ({}: AvailabilitySetterProps) => {
     <Popover position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button
-          variant="gradient"
-          gradient={{ from: 'teal', to: 'blue', deg: 60 }}
-          radius="xl"
+          // variant="gradient"
+          // gradient={{ from: 'teal', to: 'blue', deg: 60 }}
+          // radius="xl"
           leftIcon={<Home size={18} />}
           compact
           styles={(theme) => ({

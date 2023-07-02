@@ -24,18 +24,15 @@ export const Header = () => {
         <AvailabilitySetter />
         <Button
           variant="outline"
-          // gradient={{ from: 'yellow', to: 'red', deg: 60 }}
           leftIcon={<Diamond size={18} />}
           radius="xl"
           compact
-          styles={(theme) => ({
+          styles={{
             root: {
-              fontWeight: 500,
               paddingLeft: 15,
               paddingRight: 15,
-              fontSize: 13,
             },
-          })}
+          }}
         >
           5
         </Button>
