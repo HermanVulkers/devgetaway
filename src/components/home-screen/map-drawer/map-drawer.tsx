@@ -12,8 +12,36 @@ import {
 } from 'tabler-icons-react';
 import { Portal, Overlay } from '@mantine/core';
 
+interface HomeProps {
+  address: string;
+  description: string;
+  s3PhotoUrls: { id: string; url: string }[];
+  amenities: {
+    airConditioning: boolean;
+    dryer: boolean;
+    essentials: boolean;
+    hairDryer: boolean;
+    iron: boolean;
+    parking: boolean;
+    tv: boolean;
+    washer: boolean;
+    workspace: boolean;
+    gamingConsole: boolean;
+    projector: boolean;
+    homeGym: boolean;
+  };
+  developerAmenities: {
+    ergonomicChair: boolean;
+    externalMonitors: string;
+    internetSpeed: string;
+    laptopStand: boolean;
+    standingDesk: boolean;
+  };
+  status: string;
+}
+
 export const MapDrawer = ({ drawerData, setDrawerData }) => {
-  const [home, setHome] = useState(null);
+  const [home, setHome] = useState<HomeProps | null>(null);
   const [isFetching, setIsFetching] = useState(false);
   const [isPhotoOverlayOpen, setIsPhotoOverlayOpen] = useState(false);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
@@ -51,10 +79,6 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
         return toTitleCase(key);
       }
     });
-
-  const closePhotoOverlay = () => {
-    setIsPhotoOverlayOpen(false);
-  };
 
   const showNextPhoto = () => {
     setSelectedPhotoIndex((prevIndex) =>
@@ -96,10 +120,10 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
               },
             })}
           >
-            Contact user
+            Message user
           </Button>
 
-          <Drawer.CloseButton size={24} />
+          <Drawer.CloseButton size={30} />
         </Drawer.Header>
         <Styled.Container>
           <Skeleton visible={isFetching}>
@@ -140,18 +164,20 @@ export const MapDrawer = ({ drawerData, setDrawerData }) => {
                   justifyContent: 'center',
                 }}
               >
-                <Button
+                <Drawer.CloseButton
+                  size={40}
                   style={{
                     position: 'absolute',
-                    top: 10,
-                    right: 10,
+                    top: 20,
+                    right: 20,
                     zIndex: 1001,
+                    color: 'white',
+                    width: 40,
+                    height: 40,
+                    backgroundColor: 'black',
                   }}
-                  onClick={closePhotoOverlay}
-                  compact
-                >
-                  Close
-                </Button>
+                  onClick={() => setIsPhotoOverlayOpen(false)}
+                />
                 <Carousel
                   mx="auto"
                   withIndicators

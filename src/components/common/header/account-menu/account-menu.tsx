@@ -1,4 +1,4 @@
-import { Menu, Avatar, UnstyledButton, Loader } from '@mantine/core';
+import { Menu, Avatar, UnstyledButton, Loader, Chip } from '@mantine/core';
 import { Settings, MessageCircle, Home, Logout } from 'tabler-icons-react';
 
 import { signOut, useSession } from 'next-auth/react';

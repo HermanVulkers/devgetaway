@@ -1,4 +1,4 @@
-import { Button } from '@mantine/core';
+import { Button, Chip } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Diamond } from 'tabler-icons-react';
@@ -22,20 +22,9 @@ export const Header = () => {
       </Styled.Navigation>
       <Styled.RightWrapper>
         <AvailabilitySetter />
-        <Button
-          variant="outline"
-          leftIcon={<Diamond size={18} />}
-          radius="xl"
-          compact
-          styles={{
-            root: {
-              paddingLeft: 15,
-              paddingRight: 15,
-            },
-          }}
-        >
-          5
-        </Button>
+        {/* <Chip checked={true} variant="outline">
+          Messaging enabled
+        </Chip> */}
         <Styled.AccountMenu>
           <AccountMenu />
         </Styled.AccountMenu>
